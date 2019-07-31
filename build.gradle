@@ -1,0 +1,50 @@
+apply plugin: 'application' 
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'eclipse'
+apply plugin: 'maven-publish'
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+	
+	compile group: 'io.vertx', name: 'vertx-core', version: '3.8.0'
+	compile group: 'io.vertx', name: 'vertx-mqtt', version: '3.8.0'
+	compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.21'
+	compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
+	compile group: 'com.google.inject', name: 'guice', version: '4.1.0'
+	compile group: 'com.fasterxml.jackson.module', name: 'jackson-module-jaxb-annotations', version: '2.9.3'
+	compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.9.3'
+ 
+    testCompile 'junit:junit:4.12'
+    testCompile 'io.vertx:vertx-unit:3.8.0'
+    
+}
+
+mainClassName = 'rao.lalit.gameofthree.main.Main'
+
+jar {
+    manifest {
+        attributes "Main-Class": "rao.lalit.gameofthree.main.Main"
+    }
+ 
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+task copyLicense {
+    outputs.file new File("$buildDir/LICENSE")
+    doLast {
+        copy {
+            from "LICENSE"
+            into "$buildDir"
+        }
+    }
+}
+
+applicationDistribution.from(copyLicense) {
+    into ""
+}
