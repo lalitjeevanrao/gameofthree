@@ -7,8 +7,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import rao.lalit.gameofthree.domain.Player;
 import rao.lalit.gameofthree.domain.GOTPlayer;
+import rao.lalit.gameofthree.domain.Player;
 import rao.lalit.gameofthree.enums.GamePlayAction;
 
 /**
@@ -50,6 +50,12 @@ public class GamePlayTest {
     public void testWhenMessageIsZero() {
         exception.expect(RuntimeException.class);
         player.playGame("0");
+    }
+    
+    @Test
+    public void testWhenMessageIsNegative() {
+        exception.expect(RuntimeException.class);
+        player.playGame("-1");
     }
     
     @Test

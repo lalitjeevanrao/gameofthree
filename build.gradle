@@ -2,7 +2,7 @@ apply plugin: 'application'
 apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'eclipse'
-apply plugin: 'maven-publish'
+apply plugin: 'jacoco'
 
 repositories {
     jcenter()
@@ -48,3 +48,19 @@ task copyLicense {
 applicationDistribution.from(copyLicense) {
     into ""
 }
+
+jacoco {
+    toolVersion = "0.8.4"
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled false
+        csv.enabled false
+        html.destination file("${buildDir}/reports/jacocoHtml")
+    }
+}
+
+test.finalizedBy(jacocoTestReport)
+
+check.dependsOn jacocoTestReport
