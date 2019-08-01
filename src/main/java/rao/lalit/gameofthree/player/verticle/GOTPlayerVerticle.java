@@ -20,9 +20,10 @@ import rao.lalit.gameofthree.util.JSONBinder;
 public class GOTPlayerVerticle extends AbstractVerticle {
 
     private static final Logger LOG = LoggerFactory.getLogger(GOTPlayerVerticle.class);
-    private static final String TOPIC_GAME_OF_THREE = "gameofthree/game";
-    private static final String TOPIC_GAME_OF_THREE_PRESENCE = "gameofthree/presence1";
-    private static final String TOPIC_GAME_OF_THREE_RESULT = "gameofthree/result";
+    
+    private static final String TOPIC_GAME_OF_THREE = "gameofthree/game/play";
+    private static final String TOPIC_GAME_OF_THREE_PRESENCE = "gameofthree/game/presence";
+    private static final String TOPIC_GAME_OF_THREE_RESULT = "gameofthree/game/result";
 
     private final GOTPlayer player;
     private final MqttClient client;

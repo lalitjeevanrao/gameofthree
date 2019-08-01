@@ -27,7 +27,7 @@ public class Main {
 	private static final String MQTT_BROKER = "broker.hivemq.com";
 
 	/**
-	 * Initiates gameplay configuration and initialization 
+	 * Initiates gameplay configuration and setting up 
 	 * of {@link Vertx} and {@link MqttClient} <br>
 	 * 
 	 * @author lalitrao
