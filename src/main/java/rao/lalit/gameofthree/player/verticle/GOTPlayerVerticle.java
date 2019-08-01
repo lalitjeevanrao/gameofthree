@@ -73,7 +73,11 @@ public class GOTPlayerVerticle extends AbstractVerticle {
                 playGame(presencePayload);
             }
             if (TOPIC_GAME_OF_THREE_RESULT.equals(message.topicName())) {
-                LOG.info("Player {} won the game!", playerName);
+            		if (isMyMessage) {
+            			LOG.info("You won the game!");
+            		} else {
+            			LOG.info("Player {} won the game!", playerName);
+            		}
             }
         } catch (Exception e) {
             LOG.error("Exception in handleIncomingMessage. ", e);
@@ -82,7 +86,7 @@ public class GOTPlayerVerticle extends AbstractVerticle {
 
     private void startGame(String playerName) {
         LOG.info("Player {} joined the game", playerName);
-        LOG.info("Starting the game");
+        LOG.info("Starting the game with number {}", numberToStartTheGame);
         
         Payload payload = new Payload(this.player, String.valueOf(numberToStartTheGame));
         client.publish(TOPIC_GAME_OF_THREE, Buffer.buffer(JSONBinder.toJSON(payload)), 

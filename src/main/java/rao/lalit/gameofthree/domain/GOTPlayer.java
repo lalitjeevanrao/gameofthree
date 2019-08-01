@@ -42,20 +42,19 @@ public class GOTPlayer implements Player {
         }
 
         int number = Integer.parseInt(message);
-        LOG.info("Recieved number: {}", number);
         
         validateInput(number);
         
         int nextNumber;
         if (number % 3 == 0) {
             nextNumber = number / 3;
-            LOG.info("Adding {} and returning {}", 0, nextNumber);
+            LOG.info("Recieved number: {} Adding {} and returning {}", number, 0, nextNumber);
         } else if ((number + 1) % 3 == 0) {
             nextNumber = (number + 1) / 3;
-            LOG.info("Adding {} and returning {}", 1, nextNumber);
+            LOG.info("Recieved number: {} Adding {} and returning {}", number, 1, nextNumber);
         } else {
             nextNumber = (number - 1) / 3;
-            LOG.info("Substracting {} and returning {}", 1, nextNumber);
+            LOG.info("Recieved number: {} Substracting {} and returning {}", number, 1, nextNumber);
         }
         if (nextNumber == 1) {
             reply = GamePlayAction.WON.name();

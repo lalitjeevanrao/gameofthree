@@ -66,14 +66,14 @@ public class Main {
 	}
 
 	private void deployVerticle(ConfigStore store, Vertx vertx, MqttClient client) {
-		Verticle verticle = new GOTPlayerVerticle(client, 
-				new GOTPlayer(store.getPlayerName()), store.getNumberToBegin());
 		
 		client.connect(MqttClientOptions.DEFAULT_PORT, MQTT_BROKER, handler -> {
 			if (handler.failed()) {
 				LOG.error("Failed to connect to MQTT broker");
 			} else {
 				LOG.info("Successfully connected to MQTT Broker. Code: {}", handler.result().code().toString());
+				Verticle verticle = new GOTPlayerVerticle(client, 
+						new GOTPlayer(store.getPlayerName()), store.getNumberToBegin());
 				vertx.deployVerticle(verticle);
 			}
 		});
