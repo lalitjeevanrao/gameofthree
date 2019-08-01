@@ -3,25 +3,25 @@ package rao.lalit.gameofthree.payload;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import rao.lalit.gameofthree.domain.Player;
+import rao.lalit.gameofthree.domain.GOTPlayer;
 
 public class Payload {
     
-    private Player player;
+    private GOTPlayer player;
     
     private String message;
     
     @JsonCreator
-    public Payload(@JsonProperty("player") Player player, @JsonProperty("message") String message) {
+    public Payload(@JsonProperty("player") GOTPlayer player, @JsonProperty("message") String message) {
         this.player = player;
         this.message = message;
     }
 
-    public Player getPlayer() {
+    public GOTPlayer getPlayer() {
         return player;
     }
     
-    public void setPlayer(Player player) {
+    public void setPlayer(GOTPlayer player) {
         this.player = player;
     }
     

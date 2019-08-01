@@ -1,7 +1,7 @@
 package rao.lalit.gameofthree.service;
 
 import io.vertx.mqtt.MqttClient;
-import rao.lalit.gameofthree.domain.GamePlay;
+import rao.lalit.gameofthree.domain.Player;
 
 public class GameOfThree {
     public final MqttClient mqttClient;
@@ -10,7 +10,7 @@ public class GameOfThree {
         this.mqttClient = mqttClient;
     };
     
-    public void playGame(GamePlay gp) {
+    public void playGame(Player gp) {
         
     }
 }

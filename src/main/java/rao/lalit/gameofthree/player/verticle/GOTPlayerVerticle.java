@@ -1,7 +1,5 @@
 package rao.lalit.gameofthree.player.verticle;
 
-import java.util.Random;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -10,28 +8,30 @@ import io.vertx.core.AbstractVerticle;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.mqtt.MqttClient;
 import io.vertx.mqtt.messages.MqttPublishMessage;
-import rao.lalit.gameofthree.domain.Player;
+import rao.lalit.gameofthree.domain.GOTPlayer;
 import rao.lalit.gameofthree.enums.GamePlayAction;
 import rao.lalit.gameofthree.payload.Payload;
 import rao.lalit.gameofthree.util.JSONBinder;
 
 /**
+ * 
  * @author lalitrao
- *
  */
-public class PlayerVerticle extends AbstractVerticle {
+public class GOTPlayerVerticle extends AbstractVerticle {
 
-    private static final Logger LOG = LoggerFactory.getLogger(PlayerVerticle.class);
+    private static final Logger LOG = LoggerFactory.getLogger(GOTPlayerVerticle.class);
     private static final String TOPIC_GAME_OF_THREE = "gameofthree/game";
     private static final String TOPIC_GAME_OF_THREE_PRESENCE = "gameofthree/presence1";
     private static final String TOPIC_GAME_OF_THREE_RESULT = "gameofthree/result";
 
-    private final Player player;
+    private final GOTPlayer player;
     private final MqttClient client;
+    private final int numberToStartTheGame;
 
-    public PlayerVerticle(MqttClient client, Player player) {
+    public GOTPlayerVerticle(MqttClient client, GOTPlayer player, int numberToStartTheGame) {
         this.client = client;
         this.player = player;
+        this.numberToStartTheGame = numberToStartTheGame;
         LOG.info("Creating player with name {}", this.player.getPlayerName());
     }
 
@@ -83,8 +83,7 @@ public class PlayerVerticle extends AbstractVerticle {
         LOG.info("Player {} joined the game", playerName);
         LOG.info("Starting the game");
         
-        int randomNumberToBegin = new Random().nextInt(Integer.MAX_VALUE);
-        Payload payload = new Payload(this.player, String.valueOf(randomNumberToBegin));
+        Payload payload = new Payload(this.player, String.valueOf(numberToStartTheGame));
         client.publish(TOPIC_GAME_OF_THREE, Buffer.buffer(JSONBinder.toJSON(payload)), 
             MqttQoS.EXACTLY_ONCE, false, false);
     }

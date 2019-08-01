@@ -8,15 +8,16 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import rao.lalit.gameofthree.domain.Player;
+import rao.lalit.gameofthree.domain.GOTPlayer;
 import rao.lalit.gameofthree.enums.GamePlayAction;
 
 /**
  * @author lalitrao
  *
  */
-public class PlayerTest {
+public class GamePlayTest {
     
-    private Player player = new Player("some player name");
+    private Player player = new GOTPlayer("some player name");
     
     @Rule
     public final ExpectedException exception = ExpectedException.none();
@@ -77,22 +78,22 @@ public class PlayerTest {
     
     @Test
     public void testForNotEquals() {
-        Player player1 = new Player("player1");
-        Player player2 = new Player("player2");
+        GOTPlayer player1 = new GOTPlayer("player1");
+        GOTPlayer player2 = new GOTPlayer("player2");
         assertNotEquals(Boolean.TRUE, player1.equals(player2));
     }
     
     @Test
     public void testForEquals() {
-        Player player1 = new Player("player1");
-        Player player2 = new Player("player1");
+        GOTPlayer player1 = new GOTPlayer("player1");
+        GOTPlayer player2 = new GOTPlayer("player1");
         assertEquals(Boolean.TRUE, player1.equals(player2));
     }
     
     @Test
     public void testForHashCode() {
-        Player player1 = new Player("player1");
-        Player player2 = new Player("player1");
+        GOTPlayer player1 = new GOTPlayer("player1");
+        GOTPlayer player2 = new GOTPlayer("player1");
         assertEquals(Boolean.TRUE, player1.hashCode() == player2.hashCode());
     }
 }
