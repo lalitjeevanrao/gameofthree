@@ -98,7 +98,7 @@ public class Main {
 	private ConfigStore configureManualPlay(Scanner sc) {
 		LOG.info("Enter the name of the player");
 		String playerName = sc.nextLine();
-		LOG.info("Enter the number to begin play");
+		LOG.info("Enter the number to begin play. Note: If a player has already joined, the game will begin with the number player has entered");
 		int numberToPlay = Integer.parseInt(sc.nextLine());
 		LOG.info("Player name {} and number {}", playerName, numberToPlay);
 		return new ConfigStore(playerName, numberToPlay);
